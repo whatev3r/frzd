@@ -1,0 +1,10 @@
+[Unit]
+Description=webserver Daemon
+
+[Service]
+ExecStart=/bin/sh -c "/usr/bin/java -jar /usr/frzd/backend/frzd-0.0.1-SNAPSHOT.jar >> /usr/frzd/backend/logs/frzd.log"
+KillMode=control-group
+User=root
+
+[Install]
+WantedBy=multi-user.target
