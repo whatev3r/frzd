@@ -2,7 +2,7 @@ var data;
 
 var delayTimer;
 
-var deadline = "04.10.2022";
+var deadline = "04.11.2022";
 
 function doSearch(text) {
   clearTimeout(delayTimer);
@@ -14,8 +14,6 @@ function doSearch(text) {
 
     xhr.setRequestHeader("Accept", "application/json");
     xhr.setRequestHeader("Content-Type", "text/plain");
-    // xhr.setRequestHeader("Accept-Encoding", "gzip, deflate, br");
-    // xhr.setRequestHeader("Connection", "keep-alive");
 
     xhr.onload = () =>
     {
@@ -37,7 +35,7 @@ function ngForFunctionality(data) {
   let value = '';
   data.forEach((post) => {
     value += `<li ><div class="question">${post.question}</div></li><br/><li><div class="answer">${post.answer}</div><li><br/>`;
-});
+  });
   value += `<li ><div class="fuck-rostelecom">Если начала отображаться реклама, то говорим спасибо Ростелекому. Подробнее <a href="https://www.opennet.ru/opennews/art.shtml?num=52444">тут</a>, либо в гугле по запросу "ростелеком http реклама".</div></li>`;
   setDataToList(value);
 };
@@ -48,15 +46,15 @@ function setDataToList(value){
 }
 
 function setTitle() {
-  document.getElementById("title").innerHTML = `Сервис прекратит свою работу ${deadline}`;
+  document.getElementById("title").innerHTML = `Сервис будет доступен до ${deadline}`;
   setDataToList(`<li ><div class="fuck-rostelecom">Если начала отображаться реклама, то говорим спасибо Ростелекому. Подробнее <a href="https://www.opennet.ru/opennews/art.shtml?num=52444">тут</a>, либо в гугле по запросу "ростелеком http реклама".</div></li>`);
 }
 
 function setWhyBlock() {
-  document.getElementById("why_block").innerHTML = `Потому, что крутится на виртуальном сервере VDS от nic.ru. Аренда сервера проплачена до ${deadline}, дальше 890р в месяц.`;
+  document.getElementById("why_block").innerHTML = `Сервис крутится на виртуальном сервере VDS от nic.ru. Аренда сервера проплачена до ${deadline}, дальше 890р в месяц.`;
 }
 
 function initAbout() {
-  document.getElementById("title").innerHTML = `Сервис прекратит свою работу ${deadline}`;
+  document.getElementById("title").innerHTML = `Сервис будет доступен до ${deadline}`;
   setWhyBlock();
 }
