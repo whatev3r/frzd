@@ -175,6 +175,7 @@ nav a:hover {
 
 .main {
   padding: 30px 0;
+  display: grid;
 }
 
 .main article h1 {
@@ -268,7 +269,6 @@ nav a:hover {
      =============== */
   .wrapper {
     width: 1026px; /* 1140px - 10% for margins */
-    margin: 0 auto;
   }
 }
 
