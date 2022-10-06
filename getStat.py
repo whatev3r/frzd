@@ -39,15 +39,13 @@ def main():
 			if mode == "DATE": 
 				date = date + char
 		uuid = line.split('"')[5]
-		date = datetime.strptime(date, '%d/%b/%Y').strftime('%Y-%d-%m')
+		date = datetime.strptime(date, '%d/%b/%Y').strftime('%Y-%m-%d')
 
 		addToList(dates,date)
 		addToList(uuids,(date, uuid))
 		addToList(ips,(date, ip))
 
 	for date in dates:
-		ip = ''
-		uuid = ''
 		counterIp = 0
 		counterUuid = 0
 		for key in ips:
