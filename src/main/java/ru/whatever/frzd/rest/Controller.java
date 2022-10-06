@@ -5,22 +5,27 @@ import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.core.env.Environment;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import ru.whatever.frzd.dto.QnADTO;
 import ru.whatever.frzd.service.QnAService;
+import ru.whatever.frzd.utils.NginxLogParser;
 
 @RestController
 @RequestMapping("main")
 @CrossOrigin(origins = "*", maxAge = -1)
 @RequiredArgsConstructor
-public class controller {
+public class Controller {
 
     private final QnAService service;
+
+    private final Environment environment;
 
     private final Logger log = LoggerFactory.getLogger(this.getClass());
 
@@ -43,4 +48,8 @@ public class controller {
         return resp;
     }
 
+    @GetMapping("/stats")
+    List<String> getStats(){
+        return NginxLogParser.parseFile(environment.getProperty("nginx_log_file_path"));
+    }
 }
