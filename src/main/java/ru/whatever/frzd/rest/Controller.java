@@ -50,6 +50,7 @@ public class Controller {
 
     @GetMapping("/stats")
     List<String> getStats(){
+        log.info("getting stats");
         return NginxLogParser.parseFile(environment.getProperty("nginx_log_file_path"));
     }
 }
