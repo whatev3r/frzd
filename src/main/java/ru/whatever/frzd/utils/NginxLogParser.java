@@ -6,17 +6,18 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Locale;
+import java.util.stream.Collectors;
 import org.springframework.stereotype.Service;
 
 @Service
 public class NginxLogParser {
 
-    public static ArrayList<String> parseFile(String fileName) {
+    public static String parseFile(String fileName) {
         ArrayList<String> dates = new ArrayList<>();
         ArrayList<String> ips = new ArrayList<>();
         ArrayList<String> uuids = new ArrayList<>();
 
-        ArrayList<String> result = new ArrayList<>();
+        String result = "";
         try {
             BufferedReader br = new BufferedReader(new FileReader(fileName));
 
@@ -67,7 +68,7 @@ public class NginxLogParser {
             }
             br.close();
 
-            dates.forEach(date -> {
+            result = dates.stream().map(date -> {
                 int counterIp = 0;
                 int counterUuid = 0;
                 for (String key : ips) {
@@ -81,8 +82,8 @@ public class NginxLogParser {
                         counterUuid = counterUuid + 1;
                     }
                 }
-                result.add(date + " : от " + counterUuid + " до " + counterIp);
-            });
+                return date + " : от " + counterUuid + " до " + counterIp;
+            }).collect(Collectors.joining("<br>"));
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
