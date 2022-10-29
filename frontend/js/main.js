@@ -51,7 +51,7 @@ function setTitle() {
 }
 
 function setWhyBlock() {
-  document.getElementById("why_block").innerHTML = `Сервис крутится на виртуальном сервере VDS от nic.ru. Аренда сервера проплачена до ${deadline}, дальше 890р в месяц.`;
+  document.getElementById("why_block").innerHTML = `Сервис крутится на виртуальном сервере VDS от nic.ru. Аренда сервера проплачена до ${deadline}`;
 }
 
 function initAbout() {
