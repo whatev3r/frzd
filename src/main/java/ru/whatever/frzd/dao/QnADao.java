@@ -8,5 +8,5 @@ import ru.whatever.frzd.entity.QnA;
 @Repository
 public interface QnADao extends CrudRepository<QnA, Long> {
 
-    List<QnA> findByQuestionContains(String partialQuestion);
+    List<QnA> findByQuestionContainsIgnoreCase(String question);
 }

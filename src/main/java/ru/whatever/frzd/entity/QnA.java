@@ -17,4 +17,7 @@ public class QnA extends BaseEntity {
 
     @Column(name = "answer")
     private String answer;
+
+    @Column(name = "context")
+    private String context;
 }

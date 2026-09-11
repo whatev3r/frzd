@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import ru.whatever.frzd.dao.QnADao;
 import ru.whatever.frzd.dto.QnADTO;
 import ru.whatever.frzd.entity.QnA;
+import ru.whatever.frzd.utils.NginxLogParser;
 
 @Service
 @Slf4j
@@ -17,8 +18,12 @@ public class QnAServiceImpl implements QnAService {
     private final QnADao dao;
 
     @Override
-    public List<QnADTO> find(String partialQuestion) {
-        return dao.findByQuestionContains(partialQuestion).stream().map(QnADTO::new).collect(Collectors.toList());
+    public List<QnADTO> find(String partialQuestion, String context) {
+        return dao.findByQuestionContainsIgnoreCase(partialQuestion)
+                .stream()
+                .filter(qna -> qna.getContext().equals(context))
+                .map(QnADTO::new)
+                .collect(Collectors.toList());
     }
 
     @Override

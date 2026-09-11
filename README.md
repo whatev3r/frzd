@@ -19,6 +19,7 @@ nginx.conf, закидываем в /etc/nginx/
 frzd_backend.service кидаем в /usr/lib/systemd/system
 
 ### Настройка сервера
+* jdk 11
 * Устанавливаем postgresql версии 12
 * Создаем БД, прописываем название в файле конфигурации (DataSource.java)
 * Там же прописываем пользователя и пароль

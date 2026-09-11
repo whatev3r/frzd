@@ -6,5 +6,5 @@ import ru.whatever.frzd.entity.QnA;
 
 public interface QnAService extends BaseService<QnA, Long> {
 
-    List<QnADTO> find(String partialQuestion);
+    List<QnADTO> find(String partialQuestion, String context);
 }
