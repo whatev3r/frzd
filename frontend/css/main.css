@@ -58,6 +58,7 @@ nav {
   padding: 5px;
   font-weight: bold;
   margin-top: -25px;
+  white-space: pre-wrap;
 }
 
 audio,
@@ -318,7 +319,4 @@ nav a:hover {
 
 .clearfix {
   *zoom: 1;
-}
-
-
 }

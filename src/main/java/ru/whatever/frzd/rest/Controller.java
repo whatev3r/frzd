@@ -35,17 +35,16 @@ public class Controller {
 
     @PostMapping("/")
     List<QnADTO> check(@RequestBody(required = false) String partial) throws IOException {
-        if (StringUtils.isEmpty(partial)) {
-            log.info("Body is empty");
-            return new ArrayList<>();
-        }
         log.info(String.format("Request body: '%s'",partial));
 
         ObjectMapper objectMapper = new ObjectMapper();
         JsonNode jsonNode = objectMapper.readTree(partial);
-
-        // Extract the String value
         String question = jsonNode.get("question").asText();
+
+        if (StringUtils.isEmpty(question)) {
+            log.info("Question is empty");
+            return new ArrayList<>();
+        }
 
         String context = environment.getProperty("application_context");
         List<QnADTO> resp = service.find(question.toLowerCase(), context);
