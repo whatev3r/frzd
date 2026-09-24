@@ -243,32 +243,32 @@
         </insert>
         <insert tableName="qna">
             <column name="question">Отказом какой категории является отказ, приведший к задержке пассажирского поезда на перегоне (станции) на 1 час и более? </column>
-            <column name="answer">й категории</column>
+            <column name="answer">1-й категории</column>
             <column name="context">KASANT_N775p</column>
         </insert>
         <insert tableName="qna">
             <column name="question">Отказом какой категории является отказ, приведший к задержке пригородного поезда на перегоне (станции) на 1 час и более? </column>
-            <column name="answer">й категории</column>
+            <column name="answer">1-й категории</column>
             <column name="context">KASANT_N775p</column>
         </insert>
         <insert tableName="qna">
             <column name="question">Отказом какой категории является отказ, приведший к транспортному происшествию или событию, связанному с нарушением правил безопасности движения и эксплуатации железнодорожного транспорта? </column>
-            <column name="answer">й категории</column>
+            <column name="answer">1-й категории</column>
             <column name="context">KASANT_N775p</column>
         </insert>
         <insert tableName="qna">
             <column name="question">Отказом какой категории является отказ, приведший к задержке на перегоне (станции) только пассажирского поезда продолжительностью от 6 минут до 1 часа?</column>
-            <column name="answer">й категории </column>
+            <column name="answer">2-й категории </column>
             <column name="context">KASANT_N775p</column>
         </insert>
         <insert tableName="qna">
             <column name="question">Отказом какой категории является отказ, приведший к задержке на перегоне (станции) только пригородного поезда продолжительностью от 6 минут до 1 часа?</column>
-            <column name="answer">й категории</column>
+            <column name="answer">2-й категории</column>
             <column name="context">KASANT_N775p</column>
         </insert>
         <insert tableName="qna">
             <column name="question">Отказом какой категории является отказ, приведший к задержке на перегоне (станции) только грузового поезда продолжительностью от 6 минут до 1 часа?</column>
-            <column name="answer">й категории</column>
+            <column name="answer">2-й категории</column>
             <column name="context">KASANT_N775p</column>
         </insert>
         <insert tableName="qna">
@@ -423,7 +423,7 @@
         </insert>
         <insert tableName="qna">
             <column name="question">В течение какого времени возможно формирование в системе КАС АНТ оповещения об отказе технического средства с момента его возникновения (по данным автоматизированных систем или в ручном режиме)?</column>
-            <column name="answer">часов</column>
+            <column name="answer">240 часов</column>
             <column name="context">KASANT_N775p</column>
         </insert>
         <insert tableName="qna">
@@ -598,17 +598,17 @@
         </insert>
         <insert tableName="qna">
             <column name="question">Нормативным сроком от момента создания оповещения до принятия отказа технического средства к учёту или его перенаправления для отказов, не требующих проведения рекламационно-претензионной работы, являются:</column>
-            <column name="answer">часов</column>
+            <column name="answer">96 часов</column>
             <column name="context">KASANT_N775p</column>
         </insert>
         <insert tableName="qna">
             <column name="question">Нормативным сроком от момента создания оповещения до принятия отказа технического средства к учёту или его перенаправления для отказов подвижного состава; средств крепления груза в вагоне, находящемся в составе грузового поезда, являются:</column>
-            <column name="answer">часов</column>
+            <column name="answer">240 часов</column>
             <column name="context">KASANT_N775p</column>
         </insert>
         <insert tableName="qna">
             <column name="question">Нормативным сроком от момента создания оповещения до принятия отказа технического средства к учёту или его перенаправления для отказов, требующих проведения рекламационно-претензионной работы со сторонними и сервисными организациями (посредством информационного взаимодействия систем КАС АНТ и ЕАСАПР РЖД), являются: </column>
-            <column name="answer">часов</column>
+            <column name="answer">240 часов</column>
             <column name="context">KASANT_N775p</column>
         </insert>
         <insert tableName="qna">
@@ -648,7 +648,7 @@
         </insert>
         <insert tableName="qna">
             <column name="question">В течение какого времени с момента формирования оповещения об отказе в работе технического средства (подвижного состава; средств крепления груза в вагоне, находящемся в составе грузового поезда; отказов объектов инфраструктуры и подвижного состава, требующих проведения рекламационной работы со сторонними и сервисными организациями) дежурным инженером (диспетчер) / инженером линейного подразделения, службы или структурного подразделения в систему КАС АНТ должна быть внесена информация о необходимости реализации дополнительных мер при расследовании отказа?</column>
-            <column name="answer">часов</column>
+            <column name="answer">96 часов</column>
             <column name="context">KASANT_N775p</column>
         </insert>
         <insert tableName="qna">
