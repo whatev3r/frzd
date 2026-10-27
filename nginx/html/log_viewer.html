@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Spring Boot Request/Response Log Parser</title>
+    <style>
+        body { background: #1e1e1e; color: #d4d4d4; font-family: "Segoe UI", monospace; padding: 20px; margin: 0; }
+        h2 { color: #569cd6; margin-bottom: 20px; }
+        table { width: 100%; border-collapse: collapse; background: #252526; box-shadow: 0 4px 6px rgba(0,0,0,0.3); }
+        th, td { padding: 12px; text-align: left; border-bottom: 1px solid #3c3c3c; font-size: 14px; }
+        th { background: #2d2d2d; color: #9cdcfe; font-weight: 600; }
+        tr:hover { background: #2a2d2e; }
+        .time { color: #85cef1; font-family: monospace; }
+        .question { color: #ce9178; font-weight: bold; }
+        .status-ready { color: #4ec9b0; font-weight: bold; }
+        .status-none { color: #f44747; font-weight: bold; }
+        .status-unknown { color: #b5cea8; }
+        #status-msg { margin-bottom: 15px; color: #aaaaaa; font-style: italic; }
+    </style>
+</head>
+<body>
+    <h2>📊 История поисковых запросов (Из лога frzd.log)</h2>
+    <div id="status-msg">Загрузка и парсинг логов...</div>
+    
+    <table id="log-table" style="display:none;">
+        <thead>
+            <tr>
+                <th style="width: 150px;">Время</th>
+                <th>Вопрос (Question)</th>
+                <th style="width: 250px;">Результат (Response)</th>
+            </tr>
+        </thead>
+        <tbody id="log-rows"></tbody>
+    </table>
+
+    <script>
+        const rowsContainer = document.getElementById("log-rows");
+        const statusMsg = document.getElementById("status-msg");
+        const logTable = document.getElementById("log-table");
+        
+        // Регулярное выражение для поиска Request body
+        const requestRegex = /^([\d-]+ [\d:,.]+)\s+INFO.*Request body:\s*'(\{.*?\}|.*?)'/;
+
+        function loadLogs() {
+            fetch("/logs-raw?_ts=" + Date.now())
+                .then(response => response.text())
+                .then(text => {
+                    const lines = text.split("\n");
+                    let matchCount = 0;
+                    
+                    // Проверяем, находится ли пользователь в самом низу страницы перед обновлением
+                    const isAtBottom = (window.innerHeight + window.scrollY) >= document.body.scrollHeight - 50;
+
+                    // Очищаем старые строки перед рендером новых
+                    rowsContainer.innerHTML = "";
+
+                    for (let i = 0; i < lines.length; i++) {
+                        const reqMatch = lines[i].match(requestRegex);
+                        
+                        if (reqMatch) {
+                            const [fullLine, timestamp, jsonStr] = reqMatch;
+                            let questionText = "Не удалось распарсить JSON";
+                            
+                            try {
+                                const parsedJson = JSON.parse(jsonStr);
+                                questionText = parsedJson.question || jsonStr;
+                            } catch(e) {
+                                questionText = jsonStr; 
+                            }
+
+                            let responseText = "Нет данных об ответе";
+                            let statusClass = "status-unknown";
+                            
+                            const nextLine = lines[i + 1] || "";
+                            
+                            if (nextLine.includes("Response is ready")) {
+                                const parts = nextLine.split("Controller         : ");
+                                responseText = parts.pop() || "Response is ready";
+                                statusClass = "status-ready";
+                            } else if (nextLine.includes("Didn't find anything")) {
+                                responseText = "Didn't find anything";
+                                statusClass = "status-none";
+                            }
+
+                            const tr = document.createElement("tr");
+                            tr.innerHTML = `
+                                <td class="time">${timestamp}</td>
+                                <td class="question">${escapeHtml(questionText)}</td>
+                                <td class="${statusClass}">${escapeHtml(responseText)}</td>
+                            `;
+                            rowsContainer.appendChild(tr);
+                            matchCount++;
+                        }
+                    }
+
+                    statusMsg.textContent = `Найдено записей: ${matchCount}. Обновление каждые 2 сек.`;
+                    logTable.style.display = "table";
+                    
+                    // Скроллим вниз только если пользователь сам не читал историю выше
+                    if (isAtBottom) {
+                        window.scrollTo(0, document.body.scrollHeight);
+                    }
+                })
+                .catch(err => {
+                    statusMsg.textContent = "Ошибка обновления логов: " + err;
+                });
+        }
+
+        function escapeHtml(str) {
+            return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
+        }
+
+        // Первый запуск при загрузке страницы
+        loadLogs();
+
+        // Запуск автообновления каждые 2000 миллисекунд (2 секунды)
+        setInterval(loadLogs, 2000);
+    </script>
+</body>
+</html>

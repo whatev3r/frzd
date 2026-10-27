@@ -16,7 +16,13 @@ http://vm2209042835.vds.ru:8011/<br>
 Кидем в /usr/frzd/client/
 
 ### Nginx
-nginx.conf, закидываем в /etc/nginx/
+nginx.conf, закидываем в /etc/nginx/<br>
+Папку html кладем рядом
+Валидация nginx.conf:
+```sudo nginx -t```
+Перезапуск:
+```sudo systemctl restart nginx```
+
 
 ### Сервисы
 frzd_backend.service кидаем в /usr/lib/systemd/system
@@ -34,4 +40,4 @@ frzd_backend.service кидаем в /usr/lib/systemd/system
   $ systemctl enable nginx.service
   $ systemctl enable postgresql.service
   $ systemctl enable frzd_backend.service
- ```
+```
