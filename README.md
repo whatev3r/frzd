@@ -17,11 +17,11 @@ http://vm2209042835.vds.ru:8011/<br>
 
 ### Nginx
 nginx.conf, закидываем в /etc/nginx/<br>
-Папку html кладем рядом
-Валидация nginx.conf:
-```sudo nginx -t```
-Перезапуск:
-```sudo systemctl restart nginx```
+Папку html кладем рядом<br>
+Валидация nginx.conf:<br>
+```sudo nginx -t```<br>
+Перезапуск:<br>
+```sudo systemctl restart nginx```<br>
 
 
 ### Сервисы
